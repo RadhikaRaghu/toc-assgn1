@@ -3,7 +3,7 @@ SIMULATION OF MEALY MACHINE: WASHING MACHINE
 
 ABOUT:
 
-We have simulated the following implementation of Washing Machine:
+We have simulated the following implementation of Washing Machine in asp.net:
 
 Automatic Washing Machines have different states such as Pre-Wash, Wash, Rinse, Spin and Start. The machine is set with different
 parameter values like time( how many minutes the machine should spend in a particular state), temperature RPM and type of water before
