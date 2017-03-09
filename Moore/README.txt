@@ -14,5 +14,4 @@ The user will keep on inserting coins in denominations of 1,2,5,10 till the uppe
 If amount is less than 20, the vending machine remains in its initial state.
 If amount is equal to 20, the vending machine reaches the selection state.
 If amount is greater than 20, then it again is an unacceptable state, the user is first returned the change and then machine reaches the selection state
-Once the selection state is reached, an input of one from the user renders coffee, an input of two from the user
-renders tea. Both coffee and tea represent separate states. 
+Once the selection state is reached, an input of one from the user renders coffee, an input of two from the user renders tea. Both coffee and tea represent separate states. 
