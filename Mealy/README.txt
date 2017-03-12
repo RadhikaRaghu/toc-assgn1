@@ -15,7 +15,7 @@ Temperature   (Available Temperature):                     20,30,40,60,80
 
 
 
-The different types of cloth are synthetic, woollen and cotton. They can be washed either in Hot/Cold Water and the RPM for spin is also
+The different types of cloth are synthetic, woollen and cotton. They can be washed either in Cold/Warm Water and the RPM for spin is also
 dependent on the type of cloth. Based on the clothes, the parameters vary and some of the conditions are as follows:
 
 a) Synthetic clothes should be washed in cold water and the temperature setting should be below 30.
