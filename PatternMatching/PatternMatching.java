@@ -10,138 +10,79 @@ import java.util.*;
  *Code to see whether the given pattern exists in the given string or not
  * Step 1: To build a state transition table
  * Step 2: Parse the given string and see if it goes to final state using the state transition table
+ * @author MRUDULA Y 1410110251
  */
 public class PatternMatching {
 
-    /**
-     * @param args the command line arguments
-     */
-    final static int NUMBER_OF_ALPHABETS = 5;
-    final static int MAX_PATTERN_LENGTH = 10;
-    public static char[] alphabet = new char[NUMBER_OF_ALPHABETS];
-    
+    String pattern;   // the pattern to check
+    String inputString; // the string that is inputted in which the above pattern has to be checked
+    static int k =1; // k represents the state to which the NFA has to go to after seeing a particular input
     /**
      * Function to create Transition table
+     * Here we calculate the state to which the NFA goes after seeing a particular input
      * @param P 
-     * @return ST
+     * @param string
+     * @return integer - if we have a k which is equal to the length of pattern passed at any point
+     * while traversing the (@link string - input string} we return a 1 which means the pattern exists.
      */
-    public static int[][] createTransitionTable(char P[], int numberOfAlphabets, int numberCharPattern){
-        System.out.println("tr started!");
-        int k = 0; // variable that stores the lcongest prefix and suffix length
-        int curState = 0; // variable that stores the current state in study
-        int maxlength = 0;
-        System.out.println("Pattern");
-        for(int l = 0;l<numberCharPattern;l++){
-            System.out.println(P[l]);
-        }
-        //counter that points to appropriate location in given patten and the temperary pattern in study
-        int countP = 0;
-       
-        int[][] ST = new int[numberOfAlphabets][P.length]; // the transition table row:input col:state
-        char T[] = new char[MAX_PATTERN_LENGTH ];
-        for(int pattern=0;pattern<numberCharPattern;pattern++){
-            int countT = pattern;
-            for(int i = 0 ; i<numberOfAlphabets;i++){ // outer loop to take care of all possible inputs
-                k=0;
-                countT = pattern;
-                countP = 0;
-                System.out.println(countP);
-                 T[pattern] = alphabet[i];
-                 maxlength = 0;
-                  System.out.println(T[pattern]);
-                do{
-                   
-                    System.out.println("pattern = "+ pattern);
-                    System.out.println("countT ="+countT);
-                    k=0;
-                    for(int a=0,b = countT;a<=countP;a++,b++){
-                       // if (b<0){
-                         //   System.out.println("b is equal to T.length");
-                           // break;   
-                        //}
-                     
-                        
-                        System.out.println("P(a) = "+P[a]);
-                        if(P[a]!=T[b]){
-                            System.out.println("P(a) not equal to T(b)");
-                            
-                            k=-1;
-                            break;
-                        }
-                        else{
-                            System.out.println("i am in else");
-                            k++;
-                        }
-                        
-                        System.out.print("k = " + k);
-                        if(k>curState){
-                            curState = k;
-                        }
-                        
-                    }
-                    if(k>maxlength){
-                            maxlength = k;
-                    }
-                    ST[pattern][i] = maxlength;
-                     System.out.println("st = " + ST[pattern][i]);
-                     
-                         
-                     
-                     countP++; countT--;
-                     System.out.println("value of countP = " + countP);
-                }while(countP<=pattern);
-                
-               
-            }
-            T[pattern]= P[pattern];
-        }
+    public int createTransitionTable(String P, String string){
         
-        return ST;
+        char charOfStudy;
+        int m = string.length(); // it is the length of the input string
+        /**
+         * empty temporary string to which one character from 
+         *the input string is added at every iteration
+        */
+       String temp = ""; 
+       
+       //loop to traverse the input string. q is declared as the state which we are studying currently
+       for(int q=0;q<m;q++){
+           
+           charOfStudy = string.charAt(q);
+           temp = temp + charOfStudy; //adding character from the string to temp one by one
+           k = Math.min(k+1, q+2); // initializing k to a state jus next to current state or the state next to final state
+           System.out.println(k);
+           while(true){
+               
+               if(k==0){
+                   break; // we break off from the loop if reach the first most state of NFA
+               }
+              
+               if(temp.charAt(q) != P.charAt(k-1)){ // checking the character in study with the last character in pattern reached till now
+                   k = k-1;
+                   break;
+               }
+               
+               break;
+           }
+           if(k==P.length()){
+               return 1;
+           }
+       }  
+         
+       return -1;
+       
     }
     public static void main(String[] args) {
         // TODO code application logic here
-        int numberOfAlphabets;
+        
+        PatternMatching patternMatching = new PatternMatching();
+        
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter number of alphabets");
-        numberOfAlphabets = scanner.nextInt();
+        System.out.println("Enter the pattern");
+        patternMatching.pattern = scanner.nextLine();
         
-        for(int i = 0; i<numberOfAlphabets; i++){
-            try{
-                System.out.println("Enter alphabet no "+ (i+1));
-                alphabet[i] = scanner.next().charAt(0);
-            }
-            catch(Exception e){}
+        System.out.println("Enter the string in which pattern has to be checked");
+        patternMatching.inputString = scanner.nextLine();
+        
+        int present = patternMatching.createTransitionTable(patternMatching.pattern, patternMatching.inputString);
+        
+        if(present>-1){
+            System.out.println("Pattern Present");
         }
-        
-        char[] Pattern = new char[MAX_PATTERN_LENGTH];
-        int numCharInPattern;
-        System.out.println("Enter the number of characters in pattern");
-        numCharInPattern = scanner.nextInt();
-        
-        for(int pattern=0;pattern<numCharInPattern;pattern++){
-            try{
-                System.out.println("Enter "+(pattern+1)+" alphabet");
-                Pattern[pattern] = scanner.next().charAt(0);
-            }
-            catch(Exception e){}
+        else{
+            System.out.println("Pattern Not present");
         }
-        
-        int[][] transitionTable = new int[numberOfAlphabets][Pattern.length+1]; // the transition table row:state col:input
-        transitionTable = createTransitionTable(Pattern,numberOfAlphabets,numCharInPattern) ;
-        System.out.println("THE TRANSITION TABLE");
-        System.out.println();
-        for(int k =0;k<numberOfAlphabets;k++){
-            System.out.print(alphabet[k]+"   ");
-        }
-        System.out.println();
-        for(int i=0;i<=Pattern.length;i++){
-            System.out.print(i+1);
-            for(int j=0;j<numberOfAlphabets;j++){
-                System.out.print(transitionTable[i][j]+"   ");
-            }
-             System.out.println();
-        }
-        
     }
     
 }
