@@ -1,4 +1,9 @@
 # toc-assgn1
+Names of Group Members along with their github handles:
+
+1) Tanmaya Murthy 1410110460 Github Handle: Tanmaya13
+2) Mrudula        1410110251 Github Handle: MrudulaSatyaY
+3) Radhika Raghu  1410110317 Github Handle: RadhikaRaghu
 This repository contains files to implement the following:
 
 Implement string matching using Finite Automata as given in Cormen book pg. no. 995. In the first step, you need to take pattern as    an
