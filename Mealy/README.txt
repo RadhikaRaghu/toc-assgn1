@@ -28,6 +28,8 @@ f) For cotton clothes, the time spent in Pre-Wash, Wash, Rinse and Spin states a
 
 WORKING:
 
+IDE: Visual Studio is required to run the code. Download the zip file of the project 'Mealy' and run the web application in VS IDE.
+
 The user of the machine inputs the type of cloth by selecting the entry from dropdownlist. Based on
 the type of cloth, the available water types and temperature are listed. Once, the start button is pressed, all the
 parameters( except the RPM) are set and the lifecycle of the Washing Machine is printed which also highlights
